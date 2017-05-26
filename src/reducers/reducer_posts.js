@@ -15,6 +15,7 @@ export default function(state={}, action) {
     // This will turn into
     //   {"4":{"id":4,"title":"hi"},"25":{"id":25,"title":"bye"},"36":{"id":36,"title":"How are you"}}
 
+  // If action.type is not FETCH_POSTS, then return state as default.
   default:
     return state;
   }
