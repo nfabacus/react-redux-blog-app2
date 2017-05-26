@@ -3,14 +3,22 @@ import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends Component {
   renderField(field) {
+    // const { meta } = field;  //this will allow us to use just 'meta' instead of 'field.meta'...
+    const { meta: { touched, error } } = field; // furthermore, we can even pull off touched and error from meta like this. now you can just use touched and error.
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div className="form-group">
+      // <div className="form-group has-danger">
+      <div className={className}>
         <label>{field.label}</label>
         <input
           className="form-control"
           {...field.input}
         />
-        { field.meta.touched? field.meta.error: '' }
+        <div className="text-help">
+          { touched? error: '' }
+        </div>
+
       </div>
     );
   }
