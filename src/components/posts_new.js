@@ -10,14 +10,21 @@ class PostsNew extends Component {
           className="form-control"
           {...field.input}
         />
+        { field.meta.touched? field.meta.error: '' }
       </div>
     );
   }
 
+  onSubmit(values) {
+    console.log('submitted values: ', values);
+  }
 
   render() {
+    const { handleSubmit } = this.props; //handleSubmit is pulled off from redux form.
+
     return (
-      <form>
+      // When the data is submitted, run handleSubmit function. If it passes the validation, then call the onSubmit function defined above is called as a callback function.
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title For Post"
           name="title"
@@ -33,6 +40,7 @@ class PostsNew extends Component {
           name="content"
           component={this.renderField}
         />
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     );
   }
@@ -54,6 +62,7 @@ function validate(values) {
 
   // If errors is empty, the form is fine to submit
   // If errors has *any* properties, redux form assumes form is invalid
+  // Also, it passes on errors attached to the input fields (e.g.title, categories, content)
   return errors;
 }
 
