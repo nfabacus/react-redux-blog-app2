@@ -28,7 +28,10 @@ class PostsNew extends Component {
 
   onSubmit(values) {
     // console.log('submitted values: ', values);
-    this.props.createPost(values);
+    // Below, navigate to another page only after the createPost function is successfull excecuted, so add the callback function to it as below, and within it, add the code to navigate. Also, make sure to add the callback to the action creator (e.g createPost), and execute only after getting a successful response from the backend server.
+    this.props.createPost(values, ()=>{
+      this.props.history.push('/');
+    });
   }
 
   render() {
