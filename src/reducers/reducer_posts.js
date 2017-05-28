@@ -1,8 +1,10 @@
 import _ from 'lodash';
-import { FETCH_POSTS, FETCH_POST } from '../actions';
+import { FETCH_POSTS, FETCH_POST, DELETE_POST } from '../actions';
 
 export default function(state={}, action) {
   switch (action.type) {
+  case DELETE_POST:
+    return _.omit(state, action.payload);  //this omit is from lodash library. You tell it to omit the object with id (in action.payload) from state and return the new state.
 
   case FETCH_POST:
     // ES5 way
